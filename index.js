@@ -32,19 +32,19 @@ function loadOldImages(){
   }
 }
 
-function setSize(checked){
-  const width = document.getElementById('imageWidth')
-  const height = document.getElementById('imageHeight')
-  if(checked){
-    width.disabled = false;
-    height.disabled = false;
-  }else{
-    width.disabled = true;
-    width.value = 300;
-    height.disabled = true;
-    height.disabled = 300;
-  }
-}
+// function setSize(checked){
+//   const width = document.getElementById('imageWidth')
+//   const height = document.getElementById('imageHeight')
+//   if(checked){
+//     width.disabled = false;
+//     height.disabled = false;
+//   }else{
+//     width.disabled = true;
+//     width.value = 300;
+//     height.disabled = true;
+//     height.disabled = 300;
+//   }
+// }
 
 function addNewImages(imageNum) {
   for (let index = 0; index < imageNum; index++) {
