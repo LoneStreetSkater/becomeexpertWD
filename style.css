@@ -3,7 +3,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: brown;
+  /* background-color: brown; */
+  background-image: url("https://github.com/LoneStreetSkater/becomeexpertWD/blob/main/dust_scratches.png?raw=true");
 }
 
 .image-container {
@@ -15,8 +16,8 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   background-color: lightgray;
-  width: 300px;
-  height: 300px;
+  /* width: 300px;
+  height: 300px; */
 }
 
 .btn {
@@ -32,4 +33,8 @@ body {
 
 .btn:hover {
   opacity: 0.9;
+}
+
+.card.white{
+  border-radius: 10px;
 }

@@ -1,4 +1,5 @@
 const imageContainerEl = document.querySelector(".image-container");
+
 // let limit = 0;
 // if (localStorage.limit) {
 //   limit = Number(localStorage.limit);
@@ -13,6 +14,7 @@ let imagesPerLoad = localStorage.imagesPerLoad ? Number(localStorage.imagesPerLo
 let count = 0;
 const btnEl = document.querySelector("#showMore");
 const applyBtnEl = document.querySelector(".btn.orange.darken-4");
+const resetBtnEl = document.querySelector(".btn.grey.darken-4");
 
 loadOldImages();
 
@@ -47,6 +49,22 @@ btnEl.addEventListener("click", () => {
   }
 });
 
+resetBtnEl.addEventListener("click", () => {
+  // Clear localStorage
+  localStorage.clear();
+
+  // Reset input fields to defaults
+  document.getElementById("imageLimit").value = '';
+  document.getElementById("blurRate").value = '';
+  document.getElementById("grayScale").checked = false;
+  document.getElementById("setSize").checked = false;
+  document.getElementById("imageWidth").value = '';
+  document.getElementById("imageHeight").value = '';
+
+  // Reload the page to reset the UI and refresh the state
+  window.location.reload();
+});
+
 
 function loadOldImages() {
   if (localStorage.imageList) {
@@ -58,29 +76,38 @@ function loadOldImages() {
 }
 
 
-// function setSize(checked){
-//   const width = document.getElementById('imageWidth')
-//   const height = document.getElementById('imageHeight')
-//   if(checked){
-//     width.disabled = false;
-//     height.disabled = false;
-//   }else{
-//     width.disabled = true;
-//     width.value = 300;
-//     height.disabled = true;
-//     height.disabled = 300;
-//   }
-// }
+function setSize(checked){
+  const width = document.getElementById('imageWidth')
+  const height = document.getElementById('imageHeight')
+  if(checked){
+    width.disabled = false;
+    height.disabled = false;
+  }else{
+    width.disabled = true;
+    width.value = '';
+    height.disabled = true;
+    height.value = '';
+  }
+  localStorage.setSizeEnabled = checked;
+}
+
 
 
 function addNewImages(imageNum) {
   const blurRate = localStorage.blurRate || 1; // Default to 1 if no blur rate is set
   const grayScale = localStorage.grayScale === 'true' ? '&grayscale' : ''; // Add grayscale parameter if enabled
 
+  const widthInput = document.getElementById("imageWidth").value;
+  const heightInput = document.getElementById("imageHeight").value;
+
+  // Validate width and height, default to 300 if invalid or empty
+  const width = widthInput > 0 ? widthInput : 300;
+  const height = heightInput > 0 ? heightInput : 300;
+
   for (let index = 0; index < imageNum; index++) {
     if (count >= limit) break; // Ensure we don't exceed the limit
     const randomNumber = Math.floor(Math.random() * 2000);
-    createAndInsertImage(`https://picsum.photos/300?random=${randomNumber}&blur=${blurRate}${grayScale}`, true);
+    createAndInsertImage(`https://picsum.photos/${width}/${height}?random=${randomNumber}&blur=${blurRate}${grayScale}`, true);
   }
 }
 
